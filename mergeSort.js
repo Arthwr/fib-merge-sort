@@ -39,3 +39,47 @@ mergeSort(foo);
 mergeSort(bar);
 console.log(foo);
 console.log(bar);
+
+// Slightly better written mergeSort
+// Can also filter subarrays
+const merge_ = (left, right) => {
+  let sortedArr = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      sortedArr.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      sortedArr.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  while (leftIndex < left.length) {
+    sortedArr.push(left[leftIndex]);
+    leftIndex++;
+  }
+
+  while (rightIndex < right.length) {
+    sortedArr.push(right[rightIndex]);
+    rightIndex++;
+  }
+
+  return sortedArr;
+};
+
+const mergeSort_ = (array, start = 0, end = array.length - 1) => {
+  if (end - start <= 0) return array.slice(start, end + 1);
+
+  let mid = Math.floor((start + end) / 2);
+  let left = mergeSort_(array, start, mid);
+  let right = mergeSort_(array, mid + 1, end);
+
+  return merge_(left, right);
+};
+
+const foobar = [5, 8, 3, 2, 0, 7, 1, 6, 9, 4];
+const sortedFoobar = mergeSort_(foobar);
+console.log(sortedFoobar);
