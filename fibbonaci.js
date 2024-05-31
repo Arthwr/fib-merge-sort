@@ -46,3 +46,22 @@ const fibRec = (n, result = [0, 1]) => {
 
 const foo = fibRec(8);
 console.log(foo);
+
+const fibNumBottomUp = (n) => {
+  if (n === 0 || n === 1) return 1;
+
+  let twoBehind = 0;
+  let oneBehind = 1;
+  let result = 0;
+
+  for (let i = 1; i < n; i++) {
+    result = twoBehind + oneBehind;
+    twoBehind = oneBehind;
+    oneBehind = result;
+  }
+
+  return result;
+};
+
+const fii = fibNumBottomUp(5);
+console.log(fii);
